@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+    <%- include("./components/body") %>
+    <link rel="stylesheet" href="./styles/cabinet.css">
+    <title>EFD | Автошкола</title>
+</head>
+<body>
+    <div class="wrapper">
+        
+        <%- include("./components/header") %>
+
+        <main>
+            <div class="main__title">
+                <h1>Особистий кабінет</h1>
+            </div>
+            <div class="container">
+                <div class="container cabinet__container">
+                    <div class="left c_block">
+                        <div class="cabinet__block">
+                            <p>Загальний час тестування:</p>
+                            <p><strong id="Last__time">00:00:00</strong></p>
+                        </div>
+                        
+                        <div class="cabinet__block">
+                            <p>Ваш найкращий час складання іспита:</p>
+                            <p><strong id="Best__time">00:00:00</strong></p>
+                        </div>
+                    </div>
+                    <div class="right c_block">
+                        <div class="cabinet__block">
+                            <p>Кількість спроб складання іспиту: <strong id="All__atempt">0</strong></p>
+                            <p>Вдалих спроб:  <strong id="Succ__atempt">0</strong></p>
+                            <!-- <p>Спроб без помилок:  <strong>0</strong></p> -->
+                        </div>
+                        <div class="cabinet__block diagram__wrapper">
+                            <div class="diagram__left diagram">
+                                <svg width="200" height="200" viewBox="0 0 200 200" class="circular-progress circular-progress-1">
+                                    <circle class="bg"></circle>
+                                    <circle class="fg"></circle>
+                                </svg>
+                                <p>Процентний показник успішності останнього тесту</p>
+                            </div>
+                            <div class="diagram__right diagram">
+                                <svg width="200" height="200" viewBox="0 0 200 200" class="circular-progress circular-progress-2">
+                                    <circle class="bg"></circle>
+                                    <circle class="fg"></circle>
+                                </svg>
+                                <p>Процентний показник успішності усіх проходжених тестів</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <%- include("./components/footer") %>
+    </div>
+
+    <%- include("./components/authWrapper.ejs") %>
+    <%- include("./components/mainScripts.ejs") %>
+
+    
+    <script>
+
+        function getTime(seconds){
+            let hours = Math.floor(seconds / 3600);
+            let minutes = Math.floor((seconds % 3600) / 60);
+            let remainingSeconds = seconds % 60;
+            let timeString = `${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}:${remainingSeconds < 10 ? '0' + remainingSeconds : remainingSeconds}`;
+            return timeString
+        }
+
+        var circularProgress = document.querySelector('.circular-progress-1');
+        var circularProgress_2 = document.querySelector('.circular-progress-2');
+        circularProgress.style.setProperty('--progress', '0');
+        circularProgress_2.style.setProperty('--progress', '0');
+
+        const token = localStorage.getItem('token');
+
+        if (!token){
+            window.location.href = './';
+        } else {
+            setTimeout(() => {
+                getUserFetch(token).then(response => response.json()).then(data=>{
+                if(data.user){
+                    let history = JSON.parse(data.user.history)
+                    
+                    let statistic_attempt = 0 
+                    let statistic_succ_attempt = 0 
+                    
+                    let best_time = 0
+                    let all_time = 0
+
+                    let proccent_progress = 0
+                    let proccent_progress_last = 0
+
+                    
+
+                    history.forEach(element => {
+                        all_time += element.duration
+                        
+                        statistic_attempt += 1
+
+                        if (element.isGood){
+                            statistic_succ_attempt += 1
+                            if (best_time == 0){
+                                best_time = element.duration
+                            }
+                            best_time = element.duration < best_time ? element.duration : best_time
+
+                        }
+
+                        // console.log(element)
+                    });
+
+                    if (history.length >0) {
+                        let ele = history[history.length - 1];
+                        proccent_progress_last = (ele.score/ele.passing)*100
+                    }
+
+
+                    best_time = getTime(best_time)
+                    all_time = getTime(all_time)
+                    proccent_progress = (statistic_succ_attempt/statistic_attempt) * 100
+
+                    circularProgress.style.setProperty('--progress', proccent_progress_last);
+                    circularProgress_2.style.setProperty('--progress', proccent_progress);
+
+                    document.querySelector('#Last__time').innerHTML = all_time
+                    document.querySelector('#Best__time').innerHTML = best_time
+
+                    document.querySelector('#All__atempt').innerHTML = statistic_attempt
+                    document.querySelector('#Succ__atempt').innerHTML = statistic_succ_attempt
+                } else {
+                    window.location.href = './';
+                }
+                }) 
+            }, 1000);
+        }
+
+
+        // window.addEventListener('beforeunload', function (event) {
+        //     event.preventDefault();
+        //     event.returnValue = '';
+        //     alert('Будь ласка, не залишайте цю сторінку.');
+        // });
+
+
+    </script>
+</body>
+</html>

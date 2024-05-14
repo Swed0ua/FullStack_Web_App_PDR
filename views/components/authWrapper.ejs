@@ -1,0 +1,50 @@
+<div class="auth__wrapper">
+    <div class="auth__back"></div>
+    <div class="auth__area">
+        <div class="auth__closer" onclick="toggleAuthPopup(false)">
+            <div class="closer__lines" ></div>
+        </div>
+        <div class="auth__nav">
+            <div class="nav__item nav__login _active" onclick="openLoginContent()">ВХІД</div>
+            <div class="nav__item nav__reg" onclick="openRegContent()">РЕЄСТРАЦІЯ</div>
+        </div>
+        <div class="content__wrapper">
+            <form id="loginizationForm" class="auth__login auth__content _active">
+                <div class="auth__input">
+                    <label for="login__login">mail</label>
+                    <input id="login__login" name="login__login" type="email" placeholder="логін">
+                </div>
+                <div class="auth__input">
+                    <label for="login__pass">password</label>
+                    <input id="login__pass" name="login__pass" type="password" placeholder="ваш пароль">
+                </div>
+                <button class="btn auth__btn">увійти</button>
+                <div class="auth__errorArea login__errorArea"></div>
+            </form>
+            <form id="registrationForm" class="auth__reg auth__content" >
+                <div class="auth__input">
+                    <label for="reg__fname">Імя</label>
+                    <input id="reg__fname" name="reg__fname" type="text" placeholder="Петро">
+                </div>
+                <div class="auth__input">
+                    <label for="reg__lname">Фамілія</label>
+                    <input id="reg__lname" name="reg__lname" type="text" placeholder="Петренко">
+                </div>
+                <div class="auth__input">
+                    <label for="reg__login">mail</label>
+                    <input id="reg__login" name="reg__login" type="email" placeholder="ваша електронна пошта">
+                </div>
+                <div class="auth__input">
+                    <label for="reg__pass">password</label>
+                    <input id="reg__pass" name="reg__pass" type="password" placeholder="придумайте пароль">
+                </div>
+                <div class="auth__input">
+                    <label for="reg__reppass">password</label>
+                    <input id="reg__reppass" name="reg__reppass" type="password" placeholder="повторіть пароль">
+                </div>
+                <button class="btn auth__btn">зареєструватися</button>
+                <div class="auth__errorArea reg__errorArea"></div>
+            </form>
+        </div>
+    </div>
+</div>

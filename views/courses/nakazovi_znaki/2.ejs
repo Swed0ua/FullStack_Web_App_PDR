@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+    <%- include("./../../components/body") %>
+
+    <title>EFD | Автошкола | Курс</title>
+</head>
+<body>
+    <div class="wrapper">
+        
+        <%- include("./../../components/header") %>
+       
+        <main>
+            <div class="main__title">
+                <h1>Наказові знаки</h1>
+            </div>
+            <div class="container">
+                <div class="courseDetail__container">
+                    <div class="courseDetail__content">
+                        <h3>ЗНАКИ 4.1 - 4.12</h3>
+                        <p>4.1 «Рух прямо».</p>
+                        <div class="img__wrapper">
+                            <img src="./../../imgs/public/4.1.svg" >
+                        </div>
+                        <p>4.2 «Рух праворуч».</p>
+                        <div class="img__wrapper">
+                            <img src="./../../imgs/public/4.2.svg" >
+                        </div>
+                        <p>4.3 «Рух ліворуч».</p>
+                        <div class="img__wrapper">
+                            <img src="./../../imgs/public/4.3.svg" >
+                        </div>
+                        <p>4.4 «Рух прямо або праворуч». </p>
+                        <div class="img__wrapper">
+                            <img src="./../../imgs/public/4.4.svg" >
+                        </div>
+                        <p>4.5 «Рух прямо або ліворуч». </p>
+                        <div class="img__wrapper">
+                            <img src="./../../imgs/public/4.5.svg" >
+                        </div>
+                        <p>4.6 «Рух праворуч або ліворуч». Рух лише у напрямках, показаних стрілками на знаках 4.1,  4.2,  4.3,  4.4, 4.5, 4.6.</p>
+                        <div class="img__wrapper">
+                            <img src="./../../imgs/public/4.6.svg" >
+                        </div>
+                        <p>4.7 «Об’їзд перешкоди з правого боку». </p>
+                        <div class="img__wrapper">
+                            <img src="./../../imgs/public/4.7.svg" >
+                        </div>
+                        <p>4.8 «Об’їзд перешкоди з лівого боку». </p>
+                        <div class="img__wrapper">
+                            <img src="./../../imgs/public/4.8.svg" >
+                        </div>
+                        <p>4.9 «Об’їзд перешкоди з правого або лівого боку».</p>
+                        <div class="img__wrapper">
+                            <img src="./../../imgs/public/4.9.svg" >
+                        </div>
+                        <p>4.10 «Круговий рух». Вимагає об’їзду клумби (центрального ост­рівця) в напрямку, показаному стрілками на перехресті з круговим рухом.</p>
+                        <div class="img__wrapper">
+                            <img src="./../../imgs/public/4.10.svg" >
+                        </div>
+                        <p>4.11 «Рух легкових автомобілів». Дозволяється рух лише легкових автомобілів, автобусів, мотоциклів, маршрутних транспортних засобів і вантажних автомобілів, дозволена максимальна маса яких не перевищує 3,5 т.</p>
+                        <div class="img__wrapper">
+                            <img src="./../../imgs/public/4.11.svg" >
+                        </div>
+                        <p>4.12 «Обмеження мінімальної швидкості». Рух із не меншою швидкістю, ніж зазначено на знакові, але і не більшою, ніж це передбачено пунктами 12.4, 12.5, 12.6, 12.7 цих Правил.</p>
+                        <div class="img__wrapper">
+                            <img src="./../../imgs/public/4.12.svg" >
+                        </div>
+                    </div>
+                    <%- include("./components/Path", { item: 2 }) %>
+                </div>
+                <div class="courseDetail__btns">
+                    <a href="/course/nakazovi_znaki/1" class="block__btn btn courseDetail__btn">Назад</a>
+                    <a href="/course/nakazovi_znaki/3" class="block__btn btn btn__full courseDetail__btn">Далі</a>
+                </div>
+            </div>
+        </main>
+
+        <%- include("./../../components/footer") %>
+    </div>
+
+    <%- include("./../../components/authWrapper.ejs") %>
+    <%- include("./../../components/mainScripts.ejs") %>
+    
+    <script>
+        getCourcesForMain()
+    </script>
+
+</body>
+</html>

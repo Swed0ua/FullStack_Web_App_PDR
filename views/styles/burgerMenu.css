@@ -1,0 +1,59 @@
+.burger__wrapper svg {
+    height: 80px;
+    position: absolute;
+    width: 80px;
+}
+
+.plate {
+    height: 80px;
+    width: 80px;
+    transform: scale(0.8);
+}
+.burger {
+    filter: url(#gooeyness);
+}
+.burger_x {
+    transform: scale(0);
+    transition: transform 400ms;
+}
+.line {
+    fill: none;
+    stroke: black;
+    stroke-width: 6px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transform-origin: 50%;
+    transition: stroke-dasharray 500ms 200ms, stroke-dashoffset 500ms 200ms, transform 500ms 200ms;
+}
+  .burger_x .line {
+    stroke-width: 5.5px;
+  }
+  /* First plate */
+  .plate .line2 {
+    stroke-dasharray: 40 200;
+    stroke-dashoffset: 0px;
+  }
+  .plate .line3 {
+    stroke-dasharray: 40 179;
+    stroke-dashoffset: 0px;
+  }
+  .active .line {
+    transition: stroke-dasharray 500ms, stroke-dashoffset 500ms, transform 500ms;
+  }
+  .active.plate .line1 {
+    transform: scale(0, 1);
+    transition: transform 500ms 100ms;
+  }
+  .active.plate .line2 {
+    stroke-dasharray: 5px 200;
+    stroke-dashoffset: -164px;
+  }
+  .active.plate .line3 {
+    stroke-dasharray: 5px 179;
+    stroke-dashoffset: -142px;
+  }
+  .active .burger_x {
+    transform: scale(1);
+    transition: transform 400ms 350ms;
+  }
+  

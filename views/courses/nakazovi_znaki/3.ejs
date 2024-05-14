@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+    <%- include("./../../components/body") %>
+
+    <title>EFD | Автошкола | Курс</title>
+</head>
+<body>
+    <div class="wrapper">
+        
+        <%- include("./../../components/header") %>
+       
+        <main>
+            <div class="main__title">
+                <h1>Наказові знаки</h1>
+            </div>
+            <div class="container">
+                <div class="courseDetail__container">
+                    <div class="courseDetail__content">
+                        <h3>ЗНАКИ 4.1 - 4.24</h3>
+                        <p>4.13 «Кінець обмеження мінімальної швидкості». </p>
+                        <div class="img__wrapper">
+                            <img src="./../../imgs/public/4.13.svg" >
+                        </div>
+                        <p>4.14 «Доріжка для велосипедистів». Рух на велосипедах. Дозволяється рух із швидкістю пішохода особам, які рухаються в кріслах колісних. Якщо немає тротуару або пішохідної доріжки, дозволяється також рух пішоходів.  (№1091 від 29.09.2021)</p>
+                        <div class="img__wrapper">
+                            <img src="./../../imgs/public/4.14.svg" >
+                        </div>
+                        <p>4.15 «Кінець доріжки для велосипедистів».  Кінець доріжки, позначеної знаком 4.14 (№1091 від 29.09.2021)</p>
+                        <div class="img__wrapper">
+                            <img src="./../../imgs/public/4.15.svg" >
+                        </div>
+                        <p>4.16 «Доріжка для пішоходів».  Застосовується для позначення доріжок, призначених тільки для руху пішоходів. (№1091 від 29.09.2021)</p>
+                        <div class="img__wrapper">
+                            <img src="./../../imgs/public/4.16.svg" >
+                        </div>
+                        <p>4.17 «Доріжка для пішоходів і велосипедистів». Рух пішоходів і велосипедистів. Дозволяється рух із швидкістю пішохода особам, які рухаються в кріслах колісних. (№1091 від 29.09.2021)</p>
+                        <div class="img__wrapper">
+                            <img src="./../../imgs/public/4.17.svg" >
+                        </div>
+                        <p>4.18 «Суміжні пішохідна та велосипедна доріжки». Рух пішоходів, велосипедистів відповідно по пішохідній, велосипедній доріжках, які прилягають одна до одної, але розмежовані розміткою 1.1 або кольором покриття. Дозволяється рух із швидкістю пішохода по будь-якій з доріжок особам, які рухаються в кріслах колісних. (№1091 від 29.09.2021)</p>
+                        <div class="img__wrapper">
+                            <img src="./../../imgs/public/4.18.svg" >
+                        </div>
+                        
+                        <p>4.19 «Доріжка для вершників». Рух лише вершників.</p>
+                        <div class="img__wrapper">
+                            <img src="./../../imgs/public/4.19.svg" >
+                        </div>
+                        <p>4.20.1-4.20.3 «Напрямок руху транспортних засобів з небезпечними вантажами». Показує дозволений напрямок руху транспортних засобів з розпізнавальними знаками “Знак небезпеки” та “Табличка оранжевого кольору”. (№1105 від 11.11.2020)</p>
+                        <div class="img__wrapper">
+                            <img src="./../../imgs/public/4.20.1.svg" >
+                            <img src="./../../imgs/public/4.20.2.svg" >
+                            <img src="./../../imgs/public/4.20.3.svg" >
+                        </div>
+                    </div>
+                    <%- include("./components/Path", { item: 3 }) %>
+                </div>
+                <div class="courseDetail__btns">
+                    <a href="/course/nakazovi_znaki/2" class="block__btn btn courseDetail__btn">Назад</a>
+                    <a href="" class="block__btn btn btn__full courseDetail__btn _unactive">Далі</a>
+                </div>
+            </div>
+        </main>
+
+        <%- include("./../../components/footer") %>
+    </div>
+
+    <%- include("./../../components/authWrapper.ejs") %>
+    <%- include("./../../components/mainScripts.ejs") %>
+    
+    <script>
+        getCourcesForMain()
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+    <%- include("./components/body") %>
+
+    <title>EFD | Автошкола</title>
+</head>
+<body>
+    <div class="wrapper">
+        
+        <%- include("./components/header") %>
+
+        <main>
+            <div class="main__slider">
+                <div class="slider__item slider__reg">
+                    <div class="slider__back">
+                        <img src="./imgs/slides/slider_reg.jpg" alt="car auto">
+                    </div>
+                    <div class="slider__content">
+                        <h2>ПОЧНИ ВЖЕ ЗАРАЗ НАВЧАННЯ З ОNLINE ШКОЛОЮ EFD</h2>
+                        <p>Підготуватися до складання іспиту на отримання водійського посвідчення дуже просто! </p>
+                        <div class="slider__btns">
+                            <div class="slider__btn btn" onclick="btnLoginOpen()">Увійти</div>
+                            <div class="slider__btn btn__reverce btn" onclick="btnRegOpen()">Реєстрація</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider__item slider__reg">
+                    <div class="slider__back">
+                        <img src="./imgs/slides/slider_reg.jpg" alt="car auto">
+                    </div>
+                    <div class="slider__content">
+                        <h2>ПОЧНИ ВЖЕ ЗАРАЗ НАВЧАННЯ З ОNLINE ШКОЛОЮ EFD</h2>
+                        <p>Підготуватися до складання іспиту на отримання водійського посвідчення дуже просто! </p>
+                        <div class="slider__btns">
+                            <div class="slider__btn btn" onclick="btnLoginOpen()">Увійти</div>
+                            <div class="slider__btn btn__reverce btn" onclick="btnRegOpen()">Реєстрація</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider__item slider__reg">
+                    <div class="slider__back">
+                        <img src="./imgs/slides/slider_reg.jpg" alt="car auto">
+                    </div>
+                    <div class="slider__content">
+                        <h2>ПОЧНИ ВЖЕ ЗАРАЗ НАВЧАННЯ З ОNLINE ШКОЛОЮ EFD</h2>
+                        <p>Підготуватися до складання іспиту на отримання водійського посвідчення дуже просто! </p>
+                        <div class="slider__btns">
+                            <div class="slider__btn btn" onclick="btnLoginOpen()">Увійти</div>
+                            <div class="slider__btn btn__reverce btn" onclick="btnRegOpen()">Реєстрація</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container main__container">
+                <div class="main__landing">
+                    <h2 class="landing__title">наші курси</h2>
+                    <div class="landing__blocks">
+                        очікуйте...
+                        <!-- <div class="landing__block">
+                            <div class="block__img">
+                                <img src="./imgs/courses/240203_137687_3354 1___.png" alt="car">
+                            </div>
+                            <div class="block__content">
+                                <h3 class="block__title">Наказові знаки</h3>
+                                <p class="block__desc">
+                                    Це дорожні знаки, які відповідно до розділу D Віденської конвенції про дорожні знаки і сигнали мають круглу форму, синій фон та білі малюнки. Вони наказують учасникам дорожнього руху певні дії, наприклад, зміну напрямку повороту. Ці знаки встановлюють або скасовують певні режими руху, визначають учасників руху та їх обов’язки на дорозі
+                                </p>
+                                <div class="block__btns">
+                                    <button class="block__btn btn" >Дізнатися більше</button>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <%- include("./components/footer") %>
+    </div>
+
+    <%- include("./components/authWrapper.ejs") %>
+    <%- include("./components/mainScripts.ejs") %>
+    
+    <script>
+        getCourcesForMain()
+    </script>
+
+</body>
+</html>

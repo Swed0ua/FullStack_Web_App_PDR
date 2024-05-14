@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+    <%- include("./components/body") %>
+    <link rel="stylesheet" href="/styles/testPdr.css">
+    <title>EFD | Автошкола | Тест | <%= test.title %></title>
+</head>
+<body>
+    <div class="wrapper">
+        
+        <%- include("./components/header") %>
+
+        <main>
+            <div class="main__title">
+                <h1>ТЕСТ : <%= test.title %></h1>
+            </div>
+            <div class="container test__area">
+                <div class="tests__paginators">
+                    <div class="tests__paginator _processed">1</div>
+                    <div class="tests__paginator _active ">2</div>
+                    <div class="tests__paginator">3</div>
+                </div>
+                <div class="test__timer">
+                    <div class="timer">00:00</div>
+                </div>
+                <div class="test__questArea">
+                    <div class="questArea__content">
+                        <div class="questArea__title">
+                            Чи дозволено Вам виконати розворот у зображеній ситуації?
+                        </div>
+                        <div class="questArea__variants">
+                            <div class="questArea__variant _active" onclick="change_variant(this)">
+                                Дозволено
+                            </div>
+                            <div class="questArea__variant" onclick="change_variant(this)">
+                                Не Дозволено
+                            </div>
+                        </div>
+                    </div>
+                    <div class="questArea__img">
+                        <img src="/imgs/public/old018042img_018_00042.jpg" alt="<%= test.title %>">
+                    </div>
+                </div>
+                <div class="test__btns">
+                    <button class="block__btn btn _prev" onclick="prevQuest()">Назад</button>
+                    <button class="block__btn btn _next" onclick="nextQuest()">Вперед</button>
+                </div>
+            </div>
+        </main>
+        <script>
+            
+        </script>
+        <%- include("./components/footer") %>
+    </div>
+
+    <%- include("./components/authWrapper.ejs") %>
+    <%- include("./components/mainScripts.ejs") %>
+    
+    <script>
+        let seconds = 0;
+
+        let nextBtn = document.querySelector('.test__btns ._next')
+        let prevBtn = document.querySelector('.test__btns ._prev')
+
+        let totalInd = 0
+        let questionsList = []
+        let results = [
+
+        ]
+
+
+
+        window.addEventListener('beforeunload', function (event) {
+            event.preventDefault();
+            // console.log('End ', seconds)
+            event.returnValue = '';
+            alert('Будь ласка, не залишайте цю сторінку.');
+        });
+
+        let courseData = {
+            title: "<%= test.title %>",
+            id: "<%= test.id %>"
+        };
+       
+
+        
+
+        function createPaginator(questions){
+            let testsPaginators = document.querySelector('.tests__paginators')
+            let htmlElem = ''
+            let ind = 0
+            
+            questions.forEach(element => {
+                let clsList = "tests__paginator "
+                if (results[ind]){
+                    clsList += " _processed "
+                }
+                if (ind == totalInd){
+                    clsList += " _active "
+                } 
+                htmlElem += `<div class="${clsList}" data-ind="${ind}">${ind+1}</div> `
+                ind++
+            });
+            testsPaginators.innerHTML = htmlElem
+        }
+
+        let timer = document.querySelector('.test__timer .timer')
+
+        setInterval(() => {
+            // let hours = Math.floor(seconds / 3600);
+
+            let minutes = Math.floor((seconds % 3600) / 60);
+            let remainingSeconds = seconds % 60;
+            let timeString = `${minutes < 10 ? '0' + minutes : minutes}:${remainingSeconds < 10 ? '0' + remainingSeconds : remainingSeconds}`;
+            timer.innerHTML = timeString
+            seconds++
+        }, 1000);
+
+        const saveQuest = () => {
+            let select_q =  document.querySelector('.questArea__variant._active')
+            if (!select_q){
+                results[totalInd] = undefined
+            } else {
+                results[totalInd] = select_q.dataset.id
+            }
+        }
+
+        const finishTest = () => {
+            nextBtn.disabled = true
+            const token = localStorage.getItem('token');
+            let thap = "/compareAnswersGuest"
+            let headers = {}
+            console.log(token)
+            if (token){
+                thap = "/compareAnswers"
+                headers =  {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                    }
+            }
+
+            console.log(results, 'results')
+            
+            fetch(thap, {
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify({
+                        id: courseData.id,
+                        seconds:seconds, 
+                        results:results 
+                    })
+                }).then(response => response.json()).then(data=>{
+                    let res_text = data.isGood?'Ви скалали тест':"Ви не склали тестування"
+                    alert(`${res_text}\nВаш результат ${data.score}/${data.passing} прохідних`)
+                    nextBtn.disabled = false
+                    window.location.href = '/testsList';
+                })
+        }
+
+        const openQuest = (ind=0)=>{
+
+            
+
+            if (ind<0 || ind >= questionsList.length){
+                return
+            }
+            
+            if (totalInd - 1 < 0){
+                prevBtn.classList.add('_nact')
+            } else {
+                prevBtn.classList.remove('_nact')
+            }
+
+
+            if (totalInd + 1 > questionsList.length){
+                nextBtn.classList.add('_nact')
+            } else {
+                nextBtn.classList.remove('_nact')
+            }
+
+            if (totalInd + 1 == questionsList.length){
+                nextBtn.innerHTML = 'Завершити'
+            } else {
+                nextBtn.innerHTML = 'Далі'
+            }
+
+            createPaginator(questionsList)
+
+            let questArea__title = document.querySelector('.questArea__title')
+            let questArea__variants = document.querySelector('.questArea__variants')
+            let questArea__img = document.querySelector('.questArea__img img')
+            
+            let quest_htmls = ''
+
+            if (ind < questionsList.length) {
+                select_quest = questionsList[ind]
+                
+                questArea__title.innerHTML = select_quest.title
+
+                if (select_quest.img){
+                    questArea__img.src = select_quest.img
+                }
+                let ind_q = 0
+                select_quest.options.forEach(q => {
+                    let clssList = 'questArea__variant '
+                    
+                    if (results[ind] == ind_q){
+                        clssList += '_active'
+                    }
+                    quest_htmls += `<div class="${clssList}" data-id=${ind_q} onclick="change_variant(this)">${q.title}</div>`
+                    ind_q++
+                });
+
+                questArea__variants.innerHTML = quest_htmls
+                
+
+            }
+            
+        }
+
+        
+
+        const nextQuest = () => {
+            saveQuest()
+            
+            if (totalInd+1 == questionsList.length){
+                finishTest()
+                return
+            }
+
+            totalInd++;
+            openQuest(totalInd);
+        }
+
+        const prevQuest = () => {
+            saveQuest()
+            totalInd--;
+            openQuest(totalInd);
+
+            
+
+        }
+
+        
+        function get_questions(id){
+            fetch(`/getQuestions/${id}`, {
+                method: 'GET',
+            }).then(response => response.json()).then(data=>{
+                // console.log(data)
+                questionsList = data
+                openQuest(0)
+            })
+        }
+        get_questions(courseData.id)
+
+        
+        function change_variant(element){
+            let variants = document.querySelectorAll('.questArea__variants .questArea__variant')
+            variants.forEach(variant => {
+                variant.classList.remove('_active') 
+            });
+            element.classList.add('_active')
+
+        }
+    </script>
+
+</body>
+</html>

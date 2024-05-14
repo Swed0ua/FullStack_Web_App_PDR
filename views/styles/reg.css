@@ -1,0 +1,210 @@
+.auth__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: none;
+}
+
+.auth__wrapper._active{
+    display: flex;
+}
+
+.auth__wrapper .auth__back {
+    width: 100%;
+    height: 100%;
+    background: rgba(139, 140, 171, 0.8);
+}
+
+.auth__wrapper .auth__area {
+    width: 477px;
+    max-width: 90vw;
+    max-height: 90vh;
+    padding: 50px 100px;
+    background-color: white;
+    position: absolute;
+    overflow: hidden;
+    border-radius: 4px;   
+    transition: all ease 0.3s;
+    transform: scale(0);
+}
+@media screen and (max-width: 520px){
+    .auth__wrapper .auth__area {
+        padding: 12%;
+    }
+}
+
+.auth__wrapper .auth__area._active{
+    transform: scale(1);
+}
+
+.auth__wrapper .auth__area .auth__closer {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 42px;
+    height: 42px;
+    background-color: #F3F2F1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.auth__wrapper .auth__area .auth__closer .closer__lines {
+    width: 22px;
+    position: relative;
+    transition: all ease 0.3s;
+}
+
+.auth__wrapper .auth__area .auth__closer .closer__lines::after ,
+.auth__wrapper .auth__area .auth__closer .closer__lines::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #414141;
+    border-radius: 90px;
+    transform: rotate(45deg);
+}
+.auth__wrapper .auth__area .auth__closer .closer__lines::before {
+    transform: rotate(-45deg);
+}
+
+.auth__wrapper .auth__area .auth__closer:hover .closer__lines {
+    transform: rotate(90deg);
+    width: 26px;
+}
+
+/* Content AUTH */
+.auth__wrapper .auth__area .content__wrapper {
+    position: relative;
+    transition: all ease 0.5s;
+    height: 165px;
+}
+
+.auth__wrapper .auth__area .content__wrapper .auth__content.auth__login {
+    transform: translateX(-150%);
+}
+.auth__wrapper .auth__area .content__wrapper .auth__content.auth__reg {
+    transform: translateX(150%);
+}
+
+.auth__wrapper .auth__area .content__wrapper .auth__content._active {
+    transform: translateX(0);
+}
+
+
+.auth__wrapper .auth__area .auth__nav {
+    display: flex;
+    gap: 15%;
+    margin-bottom: 40px;
+}
+
+.auth__wrapper .auth__area .auth__nav .nav__item{
+    font-weight: 800;
+    font-size: 0.9rem;
+    padding: 5px 16px;
+    cursor: pointer;
+    position: relative;
+    text-transform: uppercase;
+}
+.auth__wrapper .auth__area .auth__nav .nav__item::after{
+    content: '';
+    width: 0px;
+    height: 1px;
+    background: black;
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+    transition: all ease 0.2s;
+}
+.auth__wrapper .auth__area .auth__nav .nav__item:hover::after{
+    width: 20px;
+}
+.auth__wrapper .auth__area .auth__nav .nav__item._active{
+    color: #2748BC;
+}
+.auth__wrapper .auth__area .auth__nav .nav__item._active::after{
+    background-color: #2748BC;
+}
+
+.auth__area .auth__content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    position: absolute;
+    width: 100%;
+    transition: all ease 0.5s;
+}
+
+/* auth input */
+.auth__wrapper .auth__input {
+    width: 100%;
+    height: 44px;
+    border-radius: 7px;
+    overflow: hidden;
+    position: relative;
+    background: #F8F1FF;
+}
+
+.auth__wrapper .auth__input input{
+    width: 100%;
+    height: 100%;
+    border-radius: 7px;
+
+    border: none;
+    outline: none;
+    padding: 8px 16px;
+    padding-top: 20px;
+
+    background: transparent;
+}
+.auth__wrapper .auth__input input:focus{
+    background: #eae2f3;
+    outline: 10px solid rgb(237, 224, 201);
+    outline-offset: -4px;
+}
+
+.auth__wrapper .auth__input label{
+    left: 16px;
+    top: 5px;
+    position: absolute;
+    font-size: 10px;
+    color: rgba(64, 58, 75, 0.6);
+}
+
+
+.auth__btn {
+    border: none;
+    cursor: pointer;
+
+    padding: 12px;
+    font-weight: 700;
+    border-radius: 7px;
+
+    background: rgba(39, 72, 188, 1);
+    color: #fff;
+
+    text-transform: uppercase;
+    transition: all ease 0.3s;
+}
+
+.auth__btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 5px 1px rgba(39, 72, 188, 0.5);
+}
+
+.auth__errorArea {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 200;
+    color: red;
+    height: 5px;
+}
